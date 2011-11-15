@@ -171,6 +171,11 @@ unsigned int oom_badness(struct task_struct *p, struct mem_cgroup *mem,
 	if (!p)
 		return 0;
 
+	if (p->signal->oom_score_adj == OOM_SCORE_ADJ_MIN) {
+		task_unlock(p);
+		return 0;
+	}
+
 	/*
 	 * Shortcut check for a thread sharing p->mm that is OOM_SCORE_ADJ_MIN
 	 * so the entire heuristic doesn't need to be executed for something
