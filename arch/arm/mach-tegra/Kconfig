@@ -611,3 +611,28 @@ config TEGRA_DC_USE_HW_BPP
 	  Programs platform data to inform DC driver to use current
 	  hardware value for bits per pixel setting.  Useful for
           preserving and displaying framebuffer content from bootloader.
+
+config TEGRA_BOOTBLOCK_EXPOSE
+       depends on ARCH_TEGRA
+       bool "Expose boot/recovery partitions through GPT driver"
+       default y
+
+config BOOTBLOCK_EXPOSE_SOS_OFFSET
+       depends on TEGRA_BOOTBLOCK_EXPOSE
+       int "Offset for start of recovery partition (512-byte blocks)"
+       default "15360"
+
+config BOOTBLOCK_EXPOSE_SOS_SIZE
+       depends on TEGRA_BOOTBLOCK_EXPOSE
+       int "Size of recovery partition (512-byte blocks)"
+       default "16384"
+
+config BOOTBLOCK_EXPOSE_LNX_OFFSET
+       depends on TEGRA_BOOTBLOCK_EXPOSE
+       int "Offset for start of boot partition (512-byte blocks)"
+       default "31744"
+
+config BOOTBLOCK_EXPOSE_LNX_SIZE
+       depends on TEGRA_BOOTBLOCK_EXPOSE
+       int "Size of boot partition (512-byte blocks)"
+       default "16384"
